@@ -46,14 +46,14 @@ export function Hero() {
         className="flex flex-wrap items-center gap-4 pt-2"
       >
         <a
-          href="#contact"
+          href={`mailto:${profile.email}`}
           className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-base font-medium text-white transition hover:opacity-85 dark:bg-white dark:text-black"
         >
           <Mail size={18} />
           Get in touch
         </a>
         <a
-          href="#experience"
+          href="#projects"
           className="inline-flex items-center gap-2 rounded-full border border-black/10 px-6 py-3 text-base font-medium transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
         >
           See my work

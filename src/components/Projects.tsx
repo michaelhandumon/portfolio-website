@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, FolderGit2 } from "lucide-react";
+import { Link2, FolderGit2 } from "lucide-react";
 import { Section } from "./Section";
 import { projects } from "@/data/profile";
 
@@ -34,20 +34,35 @@ export function Projects() {
         {visible.map((project) => (
           <article
             key={project.title}
-            className="flex flex-col rounded-2xl border border-black/10 p-6 transition hover:border-black/20 dark:border-white/10 dark:hover:border-white/20"
+            className="flex flex-col rounded-2xl border border-black/10 bg-white p-6 transition duration-200 ease-out hover:-translate-y-2 hover:scale-[1.05] hover:border-black/30 hover:shadow-2xl hover:shadow-black/20 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/40 dark:hover:shadow-black/60"
           >
             <div className="mb-2 flex items-start justify-between gap-2">
               <h3 className="text-xl font-semibold">{project.title}</h3>
-              <div className="flex gap-2 text-black/40 dark:text-white/40">
-                {project.repo && (
-                  <a href={project.repo} aria-label={`${project.title} repository`}>
-                    <FolderGit2 size={18} />
+              <div className="flex shrink-0 gap-2">
+                {project.repo ? (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${project.title} repository`}
+                    className="flex items-center gap-1.5 rounded-full border border-black/10 px-3 py-1 text-xs font-medium text-black/70 transition hover:border-black/30 hover:text-black dark:border-white/10 dark:text-white/70 dark:hover:border-white/30 dark:hover:text-white"
+                  >
+                    <FolderGit2 size={14} />
+                    Repo
                   </a>
-                )}
-                {project.link && (
-                  <a href={project.link} aria-label={`${project.title} live link`}>
-                    <ExternalLink size={18} />
-                  </a>
+                ) : (
+                  project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} live link`}
+                      className="flex items-center gap-1.5 rounded-full border border-black/10 px-3 py-1 text-xs font-medium text-black/70 transition hover:border-black/30 hover:text-black dark:border-white/10 dark:text-white/70 dark:hover:border-white/30 dark:hover:text-white"
+                    >
+                      <Link2 size={14} />
+                      Live
+                    </a>
+                  )
                 )}
               </div>
             </div>
