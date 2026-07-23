@@ -37,7 +37,7 @@ export function Contact() {
       <div className="grid gap-10 md:grid-cols-2">
         <div className="space-y-4">
           <p className="text-black/70 dark:text-white/70">
-            Open to full-stack, mobile, and blockchain roles or freelance projects. The fastest way to
+            Open to full-stack, mobile, and blockchain roles. The fastest way to
             reach me is email — I&apos;ll usually reply within a day.
           </p>
           <div className="space-y-3 text-sm">
