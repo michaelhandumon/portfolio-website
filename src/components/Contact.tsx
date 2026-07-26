@@ -1,116 +1,83 @@
-"use client";
-
-import { FormEvent, useState } from "react";
-import { Link2, Mail, Phone } from "lucide-react";
+import { ArrowRight, FileText, GitFork, Mail, MapPin, Phone } from "lucide-react";
 import { Section } from "./Section";
 import { profile } from "@/data/profile";
 
-type Status = "idle" | "sending" | "sent" | "error";
+const cards = [
+  {
+    label: "Email",
+    value: profile.email,
+    href: `mailto:${profile.email}`,
+    icon: Mail,
+    external: false,
+  },
+  {
+    label: "Phone",
+    value: profile.phone,
+    href: `tel:${profile.phone.replace(/\s+/g, "")}`,
+    icon: Phone,
+    external: false,
+  },
+  {
+    label: "GitHub",
+    value: profile.github.replace(/^https?:\/\//, ""),
+    href: profile.github,
+    icon: GitFork,
+    external: true,
+  },
+  {
+    label: "Resume",
+    value: "Handumon_CV.pdf",
+    href: profile.resumeUrl,
+    icon: FileText,
+    external: false,
+  },
+];
 
 export function Contact() {
-  const [status, setStatus] = useState<Status>("idle");
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("sending");
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error("Request failed");
-      setStatus("sent");
-      form.reset();
-    } catch {
-      setStatus("error");
-    }
-  }
-
   return (
     <Section id="contact" eyebrow="05 · Let's talk" title="Contact">
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="space-y-4">
-          <p className="text-black/70 dark:text-white/70">
-            Open to full-stack, mobile, and blockchain roles. The fastest way to
-            reach me is email — I&apos;ll usually reply within a day.
+        <div className="space-y-6">
+          <h3 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Let&apos;s build something.
+          </h3>
+          <p className="max-w-md text-black/70 dark:text-white/70">
+            Currently open to full-stack, mobile, and blockchain. If you&apos;re looking for a quick response, 
+            feel free to reach out to me via email or phone. I&apos;m always happy to chat about new opportunities, roles, or collaborations!
           </p>
-          <div className="space-y-3 text-sm">
-            <a href={`mailto:${profile.email}`} className="flex items-center gap-2 hover:underline">
-              <Mail size={16} /> {profile.email}
-            </a>
-            <a href={`tel:${profile.phone}`} className="flex items-center gap-2 hover:underline">
-              <Phone size={16} /> {profile.phone}
-            </a>
+        </div>
+        <div className="space-y-3">
+          {cards.map(({ label, value, href, icon: Icon, external }) => (
             <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 hover:underline"
+              key={label}
+              href={href}
+              {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+              className="group flex items-center justify-between rounded-lg border border-black/10 px-5 py-4 transition hover:border-black/30 dark:border-white/10 dark:hover:border-white/30"
             >
-              <Link2 size={16} /> linkedin.com/in/michaelhandumon
+              <div>
+                <p className="flex items-center gap-1.5 font-mono text-xs tracking-wide text-orange-500 uppercase dark:text-orange-400">
+                  <Icon size={12} /> {label}
+                </p>
+                <p className="mt-1 text-sm">{value}</p>
+              </div>
+              <ArrowRight
+                size={16}
+                className="text-black/30 transition group-hover:translate-x-0.5 group-hover:text-black/60 dark:text-white/30 dark:group-hover:text-white/60"
+              />
             </a>
+          ))}
+          <div className="flex items-center justify-between rounded-lg border border-black/10 px-5 py-4 dark:border-white/10">
+            <div>
+              <p className="flex items-center gap-1.5 font-mono text-xs tracking-wide text-orange-500 uppercase dark:text-orange-400">
+                <MapPin size={12} /> Location
+              </p>
+              <p className="mt-1 text-sm">{profile.location}</p>
+              <p className="mt-0.5 font-mono text-xs text-black/40 dark:text-white/40">
+                GMT+8 — remote across time zones
+              </p>
+            </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="mb-1 block text-sm text-black/60 dark:text-white/60">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              required
-              className="w-full rounded-lg border border-black/10 bg-transparent px-3 py-2 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:focus:border-white/30"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="mb-1 block text-sm text-black/60 dark:text-white/60">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className="w-full rounded-lg border border-black/10 bg-transparent px-3 py-2 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:focus:border-white/30"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="mb-1 block text-sm text-black/60 dark:text-white/60">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              required
-              className="w-full rounded-lg border border-black/10 bg-transparent px-3 py-2 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:focus:border-white/30"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="cursor-pointer rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-85 disabled:opacity-50 dark:bg-white dark:text-black"
-          >
-            {status === "sending" ? "Sending..." : "Send message"}
-          </button>
-          {status === "sent" && (
-            <p className="text-sm text-green-600 dark:text-green-400">
-              Thanks! Your message has been sent.
-            </p>
-          )}
-          {status === "error" && (
-            <p className="text-sm text-red-600 dark:text-red-400">
-              Something went wrong — please email me directly instead.
-            </p>
-          )}
-        </form>
       </div>
     </Section>
   );

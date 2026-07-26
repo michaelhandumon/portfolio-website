@@ -5,9 +5,9 @@ export const profile = {
     "I build reliable web and mobile applications end-to-end, focused on quality and reliability. I specialize in full-stack development, DevOps deployment, and blockchain integration.",
   location: "Iloilo, Philippines",
   email: "kmcaelian@gmail.com",
-  phone: "0938 111 6730",
+  phone: "+63 938 111 6730",
   linkedin: "https://www.linkedin.com/in/michaelhandumon",
-  github: "https://github.com/",
+  github: "https://github.com/michaelhandumon",
   resumeUrl: "/resume.pdf",
 };
 
