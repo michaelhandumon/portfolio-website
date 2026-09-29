@@ -95,8 +95,8 @@ export type ExperienceEntry = {
 export const experience: ExperienceEntry[] = [
   {
     role: "Fullstack Software Engineer",
-    company: "Confidential Client",
-    period: "2025 - 2026",
+    company: "Blockchain-based Donation Platform (Confidential)",
+    period: "2024 - 2026",
     employmentType: "Independent Contractor",
     workArrangement: "Remote",
     location: "United States",
@@ -159,10 +159,10 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
-    role: "Software Engineering Intern",
+    role: "Software Engineer",
     company: "Cuppa",
     period: "2022",
-    employmentType: "Intern",
+    employmentType: "Part-time Employee",
     workArrangement: "Remote",
     location: "Singapore",
     stack: ["Express.js", "React.js", "JavaScript", "Cypress", "Github Actions"],
@@ -174,7 +174,7 @@ export const experience: ExperienceEntry[] = [
   },
   {
     role: "Freelance Developer",
-    company: "Confidential Client",
+    company: "Gimaly Airconditioning Services",
     period: "2021 - 2022",
     employmentType: "Project-based Contractor",
     workArrangement: "Remote",
